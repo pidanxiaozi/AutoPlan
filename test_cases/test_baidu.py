@@ -1,5 +1,6 @@
 from playwright.sync_api import expect
 
+from module import Baidu
 from test_cases import *
 
 def test_baidu(page: Page) -> None:

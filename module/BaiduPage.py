@@ -7,9 +7,10 @@ class Baidu(PageObject):
         super().__init__(page)
         self.url = "https://www.baidu.com"
         self.search_input = page.locator("#kw")
+        self.百度一下 = page.locator("#su")
 
     def baidu_search(self,search_key,search_result) -> None:
         self.navigator()
         self.search_input.fill(search_key)
-        self.click_button("百度一下", timeout=3000)
+        self.百度一下.click()
         expect(self.page.get_by_text(search_result).last).to_be_visible()
