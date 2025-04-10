@@ -1,7 +1,6 @@
-from playwright.sync_api import expect
 
 from module import *
-from  module.BasePage import PageObject
+from module.BasePage import PageObject  # 添加这行导入
 class Baidu(PageObject):
     def __init__(self, page):
         super().__init__(page)

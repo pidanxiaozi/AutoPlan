@@ -1,8 +1,9 @@
+"""
+  53章
+  登录的封装 - 你的测试数据应该放在哪?
+"""
 class MYData:
-    """
-    53章
-    登录的封装 - 你的测试数据应该放在哪?
-    """
+
     def __init__(self, local=True, excel=None, yaml=None, feishu=None):
         self.local = local
         self.excel = excel
@@ -21,13 +22,9 @@ class MYData:
             pass
             # todo 把feishu转换成字典的方法
         else:
-            user = {"playwright": {"测试员": {
-                        "username": "admin",
-                        "password": "123456",
-                        "email": "admin@163.com",
-                        "phone": "12345678901",
-                        "address": "北京",
+            user = { "pidanxiaozi":{
+                        "测试员1":{"username": "pidanxiaozi","password": "weijuhong581"},
+                        "项目经理1":{"username": "winni","password": "playwright001"}}
                     }
-                }
-            }
+
         return user

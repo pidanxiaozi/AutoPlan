@@ -1,3 +1,5 @@
+import re
+
 import pytest
 
 from utils.globalMap import GlobalMap
@@ -8,10 +10,12 @@ from utils.globalMap import GlobalMap
 #     print("hello")
 #     yield
 #     print("\n'bye'")
-@pytest.fixture(autouse=True,scope="session")
+@pytest.fixture(scope="session",autouse=True)
 def test_init(base_url):
     global_map=GlobalMap()
     global_map.set("baseurl",base_url)
+    env = re.search("(https://)(.*)(.ezone.work)",base_url).group(2)
+    global_map.set("env",env)
 
 
 
@@ -21,13 +25,13 @@ def test_init(base_url):
 @pytest.fixture(scope="session")
 def browser_context_args(browser_context_args):
     return {
-        **browser_context_args,
-        "viewport": {
-            "width": 1920,
-            "height": 1080,
+        **browser_context_args,# 保留原有配置
+        "viewport": {# 设置浏览器视口大小
+            "width": 800,
+            "height": 640,
         },
-        "record_video_size": {
-            "width": 1920,
-            "height": 1080,
+        "record_video_size": {# 设置视频录制尺寸
+            "width": 800,
+            "height": 640,
         }
     }
