@@ -9,4 +9,4 @@ from module.PageInstance import PageIns
 from module.BasePage import PageObject
 from playwright.sync_api import BrowserContext
 from module import *
-from data_module import my_data
+from data_module import auth_data

@@ -15,6 +15,10 @@ class 项目集_类(PageObject):
         self.运维操作 = self.page.get_by_role("link", name="运维操作")
         self.暂无数据 = self.page.get_by_text("暂无数据")
 
+    @property
+    def 主表格(self):
+        return self.table(唯一文字:="项目集名称",表格序号=-1)
+
     def 创建项目集(self, 项目集名称="自动化创建项目集",是否需要纳秒时间戳=True) -> None:
         self.navigator()
         self.click_button("新建")

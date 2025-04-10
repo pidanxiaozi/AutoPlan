@@ -2,10 +2,11 @@ import os
 
 from filelock import FileLock
 
-from data_module.my_data import MYData
+from data_module.auth_data import MYData
 from module import *
 from utils.GetPath import get_path
 from utils.globalMap import GlobalMap  # 添加这行导入
+from module.table import Table
 
 
 class PageObject:
@@ -15,6 +16,9 @@ class PageObject:
 
     def navigator(self):
         self.page.goto(self.url)
+
+    def table(self, 唯一文字, 表格序号):
+        return Table(self.page, 唯一文字, 表格序号)
 
     def click_button(self, button_name, timeout=30_000):
         # self.page.get_by_role("button").filter(has_text=button_name).click(timeout=timeout)
