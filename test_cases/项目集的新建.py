@@ -26,4 +26,8 @@ def 删除项目集(new_context):
     my_page_测试员 =使用new_context登录并返回实例化的page(new_context, "测试员1")
     my_page_测试员.项目集.删除项目集()
 
-
+def test_删除项目集(new_context):
+    # print("创建完成执行这一步")
+    # yield
+    my_page_测试员 =使用new_context登录并返回实例化的page(new_context, "测试员1")
+    my_page_测试员.项目集.删除项目集()

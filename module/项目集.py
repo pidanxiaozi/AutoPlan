@@ -30,8 +30,9 @@ class 项目集_类(PageObject):
         while True:
             self.navigator()
             self.请输入项目集名称.fill(项目集名称)
-            self.page.wait_for_load_state('load')
-            # self.page.wait_for_timeout(3_000)
+            # self.search("自动化测试项目", "请输入项目集名称")
+            self.page.wait_for_timeout(3_000)
+            self.page.wait_for_load_state('networkidle')
             if self.暂无数据.count():
                 break
             else:
