@@ -14,7 +14,7 @@ from test_cases import *
 #     my_page.项目集.创建项目集()
 #     my_page
 
-def test_项目集的新建(new_context,删除项目集):
+def test_项目集的新建(new_context):
     my_page_测试员 =使用new_context登录并返回实例化的page(new_context, "测试员1")
     # aa =my_page_测试员.项目集.创建项目集()
     # print(aa)    这样可以打印项目集的返回值

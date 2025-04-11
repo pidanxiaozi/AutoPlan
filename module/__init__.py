@@ -1,4 +1,4 @@
-from playwright.sync_api import sync_playwright,Page,expect,BrowserContext
+from playwright.sync_api import sync_playwright,Page,expect,BrowserContext,Locator
 from module.BaiduPage import Baidu
 from module.登录页 import 登录页_类
 from module.我的任务 import 我的任务_类
