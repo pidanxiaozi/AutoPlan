@@ -104,6 +104,12 @@ def run(playwright: Playwright) -> None:
     page.get_by_title("-04-01").locator("div").click()
     page.locator("div").filter(has_text=re.compile(r"^项目集名称项目集周期父项目集请选择父项目集子项目集添加子项目集取 消确 定$")).click()
     page.locator(".ant-drawer-mask").click()
+    expect(page.get_by_role("link", name="自动化创建项目集_1744289519273708700")).to_be_visible()
+    page.locator(".ant-table-row > td:nth-child(2)").first.click()
+    expect(page.get_by_role("link", name="自动化创建项目集_1744289519273708700")).to_be_visible()
+    expect(page.locator("tbody")).to_contain_text("自动化创建项目集_1744289519273708700")
+    expect(page.get_by_role("link", name="自动化创建项目集_1744289519273708700")).to_be_visible()
+    page.locator(".ant-table-row > td:nth-child(2)").first.click()
 
     # ---------------------
     context.close()

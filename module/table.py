@@ -1,3 +1,5 @@
+import random
+
 from module import *
 
 """
@@ -38,6 +40,32 @@ class Table:
         elif isinstance(行元素定位or行序号or行文字, str):
             行定位 = self.table_div.locator("tr").filter(has_text=行元素定位or行序号or行文字)
         elif isinstance(行元素定位or行序号or行文字, int):
-            行定位 = self.table_div.locator("tbody").locator("tr").nth(行元素定位or行序号or行文字)
+            行定位 = self.table_div.locator("tbody").locator("//tr[not(@aria-hiden='true')]").nth(行元素定位or行序号or行文字)
 
         return 行定位.locator("td").nth(列序号)
+
+    # 第六十五章_表格的封装 - 获取指定行的值的字典
+    # 使用空获取随机行的数据,使用行的index获取指定行的数据,使用定位器获取指定行的数据
+    def get_row_dict(self,行元素定位or行序号: Locator or int = "random"):
+        if isinstance(行元素定位or行序号, int):
+            tr = self.table_div.locator("tbody").locator("tr").locator("visible ='true'").nth(行元素定位or行序号)
+        elif isinstance(行元素定位or行序号, Locator):
+            tr = self.table_div.locator("tr").filter(has=行元素定位or行序号)
+        else:
+            all_tr = self.table_div.locator("tbody").locator("tr").locator("visible ='true'").all()
+            tr = random.choice(all_tr)
+
+        td_text_list = tr.locator("td").all_text_contents()
+        header_text_list = self.table_header_tr.locator("th").all_text_contents()
+        row_dict = dict(zip(header_text_list, td_text_list))
+        return row_dict
+    # 使用列表名称获取当前列内容
+    def get_col_list(self,表头文字: str) -> list:
+        index = self.get_header_index(表头文字)
+        all_list = self.table_div.locator("tbody").locator("tr").locator("visible ='true'").all()
+        col_list = []
+        for tr in all_list:
+            col_list.append(tr.locator("td").nth(index).text_content())
+        return col_list
+
+

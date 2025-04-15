@@ -21,23 +21,21 @@ class 项目集_类(PageObject):
     def 主表格(self):
         return self.table(唯一文字:="项目集名称")
 
-    def 创建项目集(self, 项目集名称="自动化创建项目集",是否需要纳秒时间戳=True,开始时间="2012-01-01",结束日期="2025-10-07") -> None:
+    def 创建项目集(self, 项目集名称="自动化创建项目集",是否需要纳秒时间戳=True,开始时间="1",结束日期="7") -> None:
         self.navigator()
         self.click_button("新建")
         if 是否需要纳秒时间戳:
             项目集名称 = f"{项目集名称}_{time.time_ns()}"
         self.项目集名称.fill(项目集名称)
         self.开始时间.click()
-        self.开始时间.fill(开始时间)
-        self.结束日期.click()
-        self.结束日期.fill(结束日期)
+        self.page.click('.ant-picker-cell-inner:has-text("31")')
+        self.page.click('.ant-picker-cell-inner:has-text("31")')
         self.click_button("确定")
         self.请输入项目集名称.fill(项目集名称)
-        self.page.wait_for_timeout(3_000)
-        expect(self.page.locator("tbody")).to_contain_text("自动化创建项目集")
-
+        self.page.wait_for_load_state('networkidle')
+        # 修改断言，使用更精确的定位器
+        expect(self.page.locator("tbody.ant-table-tbody").filter(has_text=项目集名称)).to_contain_text(项目集名称)
         return 项目集名称
-
     def 删除项目集(self, 项目集名称="自动化创建项目集") -> None:
         while True:
             self.navigator()
