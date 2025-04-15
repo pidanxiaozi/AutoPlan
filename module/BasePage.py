@@ -9,10 +9,13 @@ from utils.globalMap import GlobalMap  # 添加这行导入
 from module.table import Table
 
 
+
 class PageObject:
     def __init__(self, page: Page) -> None:
         self.page = page
         self.url = ""
+        from module.locators import Locators
+        self.locators = Locators(self.page)
 
     def navigator(self):
         self.page.goto(self.url)
@@ -36,6 +39,16 @@ class PageObject:
     #         self.page.locator(".ant-input-affix-wrapper input").fill(搜索内容)
     #     self.page.wait_for_load_state("networkidle")  # 等待网络空闲状态
 
+    def 表单_文本框填写(self, 表单项名称: str, 需要填写的文本: str, 表单最上层定位: Locator = None,
+                        timeout: float = None):
+        # 等待目标元素加载完成
+        # self.page.wait_for_selector("input,textarea", state="visible")
+        if 表单最上层定位:
+            表单最上层定位.locator(self.locators.表单项中包含操作元素的最上级div(表单项名称)).locator(
+                "input,textarea").locator("visible =true").last.fill(需要填写的文本, timeout=timeout)
+        else:
+            self.locators.表单项中包含操作元素的最上级div(表单项名称).locator("input,textarea").locator(
+                "visible =true").last.fill(需要填写的文本, timeout=timeout)
 
 # 第五十四章_登录的封装 - 登录的伪代码
 # def w使用new_context登录并返回实例化的page(new_context, 用户别名):

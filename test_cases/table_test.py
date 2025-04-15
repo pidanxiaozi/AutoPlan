@@ -10,9 +10,9 @@ def test_new_context(new_context):
     my_page_测试员1.项目集.navigator()
     # table_div = my_page_测试员1.项目集.主表格.table_div.highlight()
     my_page_测试员1.page.wait_for_timeout(3_000)
-    index = my_page_测试员1.项目集.主表格.get_header_index("开始时间")
+    # index = my_page_测试员1.项目集.主表格.get_header_index("开始时间")
     # loc =my_page_测试员1.项目集.主表格.get_row_locator(my_page_测试员1.page.get_by_text("自动化创建项目集_1744289519273708700")).highlight()
-    完成时间=my_page_测试员1.项目集.主表格.get_cell_locator(1,16).text_content()
+    # 完成时间=my_page_测试员1.项目集.主表格.get_cell_locator(1,16).text_content()
     # my_page_测试员1.项目集.主表格.get_row_dict()
     # my_page_测试员1.项目集.主表格.get_row_dict(-1)
     # my_page_测试员1.项目集.主表格.get_row_dict(my_page_测试员1.page.get_by_text("自动化创建项目集_1744597235125746200"))
@@ -20,9 +20,12 @@ def test_new_context(new_context):
     # my_page_测试员1.项目集.主表格.get_col_list("开始时间")
     # my_page_测试员1.项目集.主表格.get_col_list("项目集名称")
     # my_page_测试员1.项目集.主表格.get_col_list("完成时间")
-    # my_page_测试员1.项目集.主表格.get_col_list("项目数")
+    my_page_测试员1.项目集.主表格.get_col_list("项目数")
+    # my_page_测试员1.项目集.表单_文本框填写("项目集名称","123")
 
+    my_page_测试员1.page.wait_for_selector("label:has-text('项目集名称')")  # 添加等待
+    my_page_测试员1.项目集.表单_文本框填写("项目集名称", "123")
 
-    print(完成时间)
+    # print(完成时间)
     my_page_测试员1
 
