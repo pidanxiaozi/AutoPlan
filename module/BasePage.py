@@ -81,7 +81,7 @@ class PageObject:
 def 使用new_context登录并返回实例化的page(new_context, 用户别名):
     from module.PageInstance import PageIns
     global_Map = GlobalMap()
-    被测环境 = global_Map.get("env")
+    被测环境 = global_Map.get("env")#--base-url=https://pidanxiaozi.ezone.work
     # 用户名 = MYData().userinfo(被测环境, 用户别名)["username"]
     # 密码 = MYData().userinfo(被测环境, 用户别名)["password"]
     # 修改为正确的调用方式

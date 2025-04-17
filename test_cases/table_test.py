@@ -20,11 +20,16 @@ def test_new_context(new_context):
     # my_page_测试员1.项目集.主表格.get_col_list("开始时间")
     # my_page_测试员1.项目集.主表格.get_col_list("项目集名称")
     # my_page_测试员1.项目集.主表格.get_col_list("完成时间")
-    my_page_测试员1.项目集.主表格.get_col_list("项目数")
+    # my_page_测试员1.项目集.主表格.get_col_list("项目数")
     # my_page_测试员1.项目集.表单_文本框填写("项目集名称","123")
 
-    my_page_测试员1.page.wait_for_selector("label:has-text('项目集名称')")  # 添加等待
+    # my_page_测试员1.page.wait_for_selector("label:has-text('项目集名称')")  # 添加等待
     my_page_测试员1.项目集.表单_文本框填写("项目集名称", "123")
+    my_page_测试员1.项目集.表单_文本框填写("项目集名称1", "123", timeout=3000)
+    my_page_测试员1.项目集.表单_文本框填写("项目集名称", "123123456", my_page_测试员1.page.locator(
+        '//*[@class="ant-form ant-form-horizontal"]'))# 定位最外层表单
+
+
 
     # print(完成时间)
     my_page_测试员1
