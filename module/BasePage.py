@@ -39,6 +39,7 @@ class PageObject:
     #         self.page.locator(".ant-input-affix-wrapper input").fill(搜索内容)
     #     self.page.wait_for_load_state("networkidle")  # 等待网络空闲状态
 
+    # 第七十章_表单的封装 - -操作文本框
     def 表单_文本框填写(self, 表单项名称: str, 需要填写的文本: str, 表单最上层定位: Locator = None,
                         timeout: float = None):
         # 等待目标元素加载完成
@@ -49,6 +50,38 @@ class PageObject:
         else:
             self.locators.表单项中包含操作元素的最上级div(表单项名称).locator("input,textarea").locator(
                 "visible =true").last.fill(需要填写的文本, timeout=timeout)
+
+    # 第七十一章_表单的封装 - -操作下拉单选框
+    def 表单_下拉框选择(self, 表单项名称: str, 需要选择的项: str, 表单最上层定位: Locator = None,
+                        timeout: float = None):
+        if 表单最上层定位:
+            表单最上层定位.locator(self.locators.表单项中包含操作元素的最上级div(表单项名称)).locator("visible =true").click(timeout=timeout)
+            if 表单最上层定位.locator(self.locators.表单项中包含操作元素的最上级div(表单项名称)).locator('//input[@type="search"]').count():
+                表单最上层定位.locator(self.locators.表单项中包含操作元素的最上级div(表单项名称)).locator('//input[@type="search"]').fill(需要选择的项, timeout=timeout)
+            self.page.locator(".ant-select-dropdown").locator("visible =true").get_by_text(需要选择的项).click(timeout=timeout)
+        else:
+            self.locators.表单项中包含操作元素的最上级div(表单项名称).locator("visible =true").click(timeout=timeout)
+            if self.locators.表单项中包含操作元素的最上级div(表单项名称).locator('//input[@type="search"]').count():
+                self.locators.表单项中包含操作元素的最上级div(表单项名称).locator('//input[@type="search"]').fill(需要选择的项, timeout=timeout)
+            self.page.locator(".ant-select-dropdown").locator("visible =true").get_by_text(需要选择的项).click(timeout=timeout)
+        expect(self.page.locator(".ant-select-dropdown")).to_be_hidden(timeout=timeout)
+    #第七十二章_表单的封装---操作radio和switch
+    def 表单_radio选择(self, 表单项名称: str, 需要选择的项: str, 表单最上层定位: Locator = None,
+                        timeout: float = None):
+        if 表单最上层定位:
+            表单最上层定位.locator(self.locators.表单项中包含操作元素的最上级div(表单项名称)).locator("label").locator("visible =true").filter(has_text=需要选择的项).locator("input").check(timeout=timeout)
+        else:
+            self.locators.表单项中包含操作元素的最上级div(表单项名称).locator("label").locator("visible =true").filter(has_text=需要选择的项).locator("input").check(timeout=timeout)
+    def 表单_switch选择(self, 表单项名称: str, 开关状态: str, 表单最上层定位: Locator = None,
+                        timeout: float = None):
+        if "开" in 开关状态 or "是" in 开关状态:
+            开关状态bool = True
+        else:
+            开关状态bool = False
+        if 表单最上层定位:
+            表单最上层定位.locator(self.locators.表单项中包含操作元素的最上级div(表单项名称)).get_by_role("switch").set_checked(开关状态bool, timeout=timeout)
+        else:
+            self.locators.表单项中包含操作元素的最上级div(表单项名称).get_by_role("switch").set_checked(开关状态bool, timeout=timeout)
 
 # 第五十四章_登录的封装 - 登录的伪代码
 # def w使用new_context登录并返回实例化的page(new_context, 用户别名):

@@ -25,9 +25,15 @@ def test_new_context(new_context):
 
     # my_page_测试员1.page.wait_for_selector("label:has-text('项目集名称')")  # 添加等待
     my_page_测试员1.项目集.表单_文本框填写("项目集名称", "123")
-    my_page_测试员1.项目集.表单_文本框填写("项目集名称1", "123", timeout=3000)
+    # my_page_测试员1.项目集.表单_文本框填写("项目集名称1", "123", timeout=3000)
     my_page_测试员1.项目集.表单_文本框填写("项目集名称", "123123456", my_page_测试员1.page.locator(
         '//*[@class="ant-form ant-form-horizontal"]'))# 定位最外层表单
+    my_page_测试员1.项目集.表单_下拉框选择("父项目集","自动化创建项目集_1744358276665027300")
+    my_page_测试员1.项目集.表单_radio选择("权限类型", "企业内公开")
+    my_page_测试员1.项目集.表单_switch选择("创建文档空间", "开")
+    my_page_测试员1.项目集.表单_switch选择("创建文档空间", "关")
+
+
 
 
 

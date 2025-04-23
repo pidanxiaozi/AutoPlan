@@ -28,7 +28,7 @@ def browser_context_args(browser_context_args):
         **browser_context_args,# 保留原有配置
         "viewport": {# 设置浏览器视口大小
             "width": 800,
-            "height": 640,
+            "height": 900,
         },
         "record_video_size": {# 设置视频录制尺寸
             "width": 800,
