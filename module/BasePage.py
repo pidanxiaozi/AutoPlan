@@ -65,7 +65,7 @@ class PageObject:
                 self.locators.表单项中包含操作元素的最上级div(表单项名称).locator('//input[@type="search"]').fill(需要选择的项, timeout=timeout)
             self.page.locator(".ant-select-dropdown").locator("visible =true").get_by_text(需要选择的项).click(timeout=timeout)
         expect(self.page.locator(".ant-select-dropdown")).to_be_hidden(timeout=timeout)
-    #第七十二章_表单的封装---操作radio和switch
+    #第七十二章_表单的封装---操作radio和switch1
     def 表单_radio选择(self, 表单项名称: str, 需要选择的项: str, 表单最上层定位: Locator = None,
                         timeout: float = None):
         if 表单最上层定位:
