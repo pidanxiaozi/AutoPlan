@@ -7,8 +7,8 @@ from module import *
 from utils.GetPath import get_path
 from utils.globalMap import GlobalMap  # 添加这行导入
 from module.table import Table
-
-
+from utils.my_date import *
+import pytest
 
 class PageObject:
     def __init__(self, page: Page) -> None:
@@ -82,6 +82,44 @@ class PageObject:
             表单最上层定位.locator(self.locators.表单项中包含操作元素的最上级div(表单项名称)).get_by_role("switch").set_checked(开关状态bool, timeout=timeout)
         else:
             self.locators.表单项中包含操作元素的最上级div(表单项名称).get_by_role("switch").set_checked(开关状态bool, timeout=timeout)
+
+    def 表单_日期选择(self, 表单项名称: str, 日期: str, 表单最上层定位: Locator = None,
+                        timeout: float = None):
+        if 表单最上层定位:
+            日期控件层定位 = 表单最上层定位.locator(self.locators.表单项中包含操作元素的最上级div(表单项名称))
+        else:
+            日期控件层定位 = self.locators.表单项中包含操作元素的最上级div(表单项名称)
+        日期列表=日期.split(",")
+        for index,单日期 in enumerate(日期列表):
+            try:
+                int(单日期)
+                格式化后的日期=返回当前时间xxxx_xx_xx加N天(int(单日期))
+            except:
+                格式化后的日期=单日期
+            日期控件层定位.locator("input").nth(index).click(timeout=timeout)
+            日期控件层定位.locator("input").nth(index).fill(格式化后的日期, timeout=timeout)
+            日期控件层定位.locator("input").nth(index).blur(timeout=timeout)
+
+    # 第七十五章 自动填写表单
+    def 快捷操作_填写表单(self, 表单最上层定位: Locator = None, timeout: float = None,**kwargs):
+        for 表单项,内容 in kwargs.items():
+            if not 内容:
+                continue
+            elif self.locators.表单项中包含操作元素的最上级div(表单项).locator(".ant-input").count():
+                self.表单_文本框填写(表单项名称=表单项,需要填写的文本=内容,表单最上层定位=表单最上层定位,timeout=timeout)
+            elif self.locators.表单项中包含操作元素的最上级div(表单项).locator(".ant-select-selector").count():
+                self.表单_下拉框选择(表单项名称=表单项,需要选择的项=内容,表单最上层定位=表单最上层定位,timeout=timeout)
+            elif self.locators.表单项中包含操作元素的最上级div(表单项).locator(".ant-radio-group").count():
+                self.表单_radio选择(表单项名称=表单项,需要选择的项=内容,表单最上层定位=表单最上层定位,timeout=timeout)
+            elif self.locators.表单项中包含操作元素的最上级div(表单项).get_by_role("switch").count():
+                self.表单_switch选择(表单项名称=表单项,开关状态=内容,表单最上层定位=表单最上层定位,timeout=timeout)
+            elif self.locators.表单项中包含操作元素的最上级div(表单项).locator(".ant-picker").count():
+                self.表单_日期选择(表单项名称=表单项,日期=内容,表单最上层定位=表单最上层定位,timeout=timeout)
+            else:
+                pytest.fail(f"不支持的快捷表单填写:\n{表单项}:{内容}")
+    # def 快捷操作_填写表单_增加根据数据类确定唯一表单版(self, 表单最上层定位: Locator = None, timeout: float = None,**kwargs):
+
+
 
 # 第五十四章_登录的封装 - 登录的伪代码
 # def w使用new_context登录并返回实例化的page(new_context, 用户别名):
