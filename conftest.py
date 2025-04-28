@@ -1,5 +1,6 @@
 import re
 
+import allure
 import pytest
 
 from utils.globalMap import GlobalMap
@@ -17,8 +18,21 @@ def test_init(base_url):
     env = re.search("(https://)(.*)(.ezone.work)",base_url).group(2)
     global_map.set("env",env)
 
-
-
+# 第八十章_日志和报告---allure的失败截图附加
+@pytest.hookimpl(tryfirst=True,hookwrapper=True)
+def pytest_runtest_makereport(item):
+    outcome = yield
+    report = outcome.get_result()
+    if report.failed:
+        try:
+            for context in item.funcargs['browser'].contexts:
+                for page in context.pages:
+                    if page.is_closed():
+                        continue
+                    bytes_png=page.screenshot(timeout=5000, full_page=True)
+                    allure.attach(bytes_png,f"失败截图---{page.title()}")
+        except:
+            ...
 
 # conftest.py配置浏览器窗口大小,配置录制视频的窗口大小,   pytest.init文件中 --video=on
 # #启用视频录制功能，测试运行时会录制视频
