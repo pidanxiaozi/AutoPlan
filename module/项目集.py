@@ -23,7 +23,7 @@ class 项目集_类(PageObject):
 
     def 创建项目集(self, 项目集名称="自动化创建项目集",是否需要纳秒时间戳=True,开始时间="1",结束日期="7") -> None:
         self.navigator()
-        self.click_button("新建23",timeout=3_000)
+        self.click_button("新建",timeout=3_000)
         if 是否需要纳秒时间戳:
             项目集名称 = f"{项目集名称}_{time.time_ns()}"
         self.项目集名称.fill(项目集名称)
@@ -37,31 +37,31 @@ class 项目集_类(PageObject):
         expect(self.page.locator("tbody.ant-table-tbody").filter(has_text=项目集名称)).to_contain_text(项目集名称)
         return 项目集名称
     def 删除项目集(self, 项目集名称="自动化创建项目集") -> None:
-        # while True:
-        #     self.navigator()
-        #     self.请输入项目集名称.fill(项目集名称)
-        #     # self.search("自动化测试项目", "请输入项目集名称")
-        #     self.page.wait_for_timeout(3_000)
-        #     self.page.wait_for_load_state('networkidle')
-        #     if self.暂无数据.count():
-        #         break
-        #     else:
-        #         self.设置齿轮.last.click()
-        #         self.运维操作.click()
-        #         self.click_button("删除项目集")
-        #         self.click_button("确定")
-        self.navigator()
-        self.请输入项目集名称.fill(项目集名称)
-        # self.search("自动化测试项目", "请输入项目集名称")
-        self.page.wait_for_timeout(3_000)
-        self.page.wait_for_load_state('networkidle')
-        if self.暂无数据.count():
-            pass
-        else:
-            self.设置齿轮.last.click()
-            self.运维操作.click()
-            self.click_button("删除项目集")
-            self.click_button("确定")
+        while True:
+            self.navigator()
+            self.请输入项目集名称.fill(项目集名称)
+            # self.search("自动化测试项目", "请输入项目集名称")
+            self.page.wait_for_timeout(3_000)
+            self.page.wait_for_load_state('networkidle')
+            if self.暂无数据.count():
+                break
+            else:
+                self.设置齿轮.last.click()
+                self.运维操作.click()
+                self.click_button("删除项目集")
+                self.click_button("确定")
+        # self.navigator()
+        # self.请输入项目集名称.fill(项目集名称)
+        # # self.search("自动化测试项目", "请输入项目集名称")
+        # self.page.wait_for_timeout(3_000)
+        # self.page.wait_for_load_state('networkidle')
+        # if self.暂无数据.count():
+        #     pass
+        # else:
+        #     self.设置齿轮.last.click()
+        #     self.运维操作.click()
+        #     self.click_button("删除项目集")
+        #     self.click_button("确定")
 
 
 
